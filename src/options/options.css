@@ -1,0 +1,37 @@
+body {
+  background-color: #f7f7f7;
+}
+
+.api-options {
+    margin-left: 3rem !important;
+}
+
+.select-options {
+    margin-left: 2rem !important;
+}
+
+.save-options {
+    margin-left: 2rem !important;
+}
+
+.my-tooltip {
+    margin-top: -0.2rem !important;
+    margin-left: 1rem !important;
+}
+
+#api-input {
+    width: 25rem !important;
+}
+
+.save-error-success {
+    margin-bottom: 1rem;
+}
+
+.error-success {
+    margin-left: 1rem !important;
+}
+
+#success {
+    color: #129912 !important;
+}
+

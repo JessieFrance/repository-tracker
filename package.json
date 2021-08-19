@@ -1,0 +1,52 @@
+{
+  "name": "repository-tracker",
+  "version": "1.0.0",
+  "description": "A chrome extension to track repository activity on GitHub",
+  "scripts": {
+    "dev": "webpack --watch --progress --config webpack.dev.js",
+    "build": "webpack --watch --progress --config webpack.prod.js",
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "lint:check": "eslint '*/**/*.{js,ts,tsx}'",    
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
+  },
+  "author": "Jessie France (https://github.com/jessiefrance)",  
+  "license": "MIT",
+  "bugs": "https://github.com/JessieFrance/repository-tracker/issues",
+  "homepage": "https://github.com/JessieFrance/repository-tracker",
+  "devDependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@types/chrome": "^0.0.134",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^7.0.0",
+    "css-loader": "^5.2.4",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "fontsource-roboto": "^4.0.0",
+    "html-webpack-plugin": "^4.5.2",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.3.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.1.1",
+    "ts-loader": "^8.2.0",
+    "typescript": "^4.2.4",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0",
+    "webpack-merge": "^5.7.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  }
+}
