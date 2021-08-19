@@ -5,6 +5,25 @@ import {
   Repository,
 } from '../../types';
 
+type SaveData = LocalStorage | LocalStorageOptions;
+
+/**
+ * Save data to local storage
+ * @param  {SaveData}  data Data to save to local storage
+ * @return {Promise}             Promise (void) that saves to local storage
+ */
+const saveLocalStorage = (data: SaveData): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    try {
+      chrome.storage.local.set(data, () => {
+        resolve();
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 /**
  * Set the badge number from local storage
  * @param  {number}  badgeNumber The badge number to save
@@ -15,16 +34,7 @@ export const setStoredBadgeNumber = (badgeNumber: number): Promise<void> => {
   const data: LocalStorage = {
     badgeNumber,
   };
-
-  return new Promise((resolve, reject) => {
-    try {
-      chrome.storage.local.set(data, () => {
-        resolve();
-      });
-    } catch (error) {
-      reject(error);
-    }
-  });
+  return saveLocalStorage(data);
 };
 
 /**
@@ -56,16 +66,7 @@ export const setStoredRepositories = (
   const data: LocalStorage = {
     repositories,
   };
-
-  return new Promise((resolve, reject) => {
-    try {
-      chrome.storage.local.set(data, () => {
-        resolve();
-      });
-    } catch (error) {
-      reject(error);
-    }
-  });
+  return saveLocalStorage(data);
 };
 
 /**
@@ -97,16 +98,7 @@ export const setStoredOptions = (
   const data: LocalStorage = {
     options,
   };
-
-  return new Promise((resolve, reject) => {
-    try {
-      chrome.storage.local.set(data, () => {
-        resolve();
-      });
-    } catch (error) {
-      reject(error);
-    }
-  });
+  return saveLocalStorage(data);
 };
 
 /**
