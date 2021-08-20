@@ -1,0 +1,23 @@
+.repo-issues {
+    margin-left: -1.5rem !important;
+}
+
+.issue-text {
+    width: 75% !important;
+    font-size: 0.8rem !important;
+}
+
+.issue-link {
+    color: #3f51b5;
+}
+
+.issue-link:hover {
+    cursor: pointer;
+}
+
+.issue-author {
+    font-style: italic !important;
+}
+.details-header {
+    font-weight: bold !important;
+}

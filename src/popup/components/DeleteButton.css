@@ -1,0 +1,13 @@
+.delete-button {
+    margin-top: 1rem !important;
+    background-color: #fa0000 !important;
+    border-radius: 50% !important;
+    color: #fafafa !important;
+    padding: 0.2rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in 0.1s;    
+}
+
+.delete-button:hover {
+    opacity: 1.0;
+}
