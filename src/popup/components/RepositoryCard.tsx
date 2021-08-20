@@ -18,7 +18,8 @@ import {
   ArrowBack as ArrowBackIcon,
   DeleteForever as DeleteForeverIcon,
 } from '@material-ui/icons';
-import { IssueSummary, Repository } from '../../types';
+import { openIssueTab } from '../../utils/chrome';
+import { Repository } from '../../types';
 import CardOwnerName from './CardOwnerName';
 import './RepositoryCard.css';
 
@@ -105,13 +106,6 @@ const RepositoryCard = ({
   const decrementCardIndex = () => {
     const index = cardIndex - 1;
     setCardIndex(index < 0 ? cardArr.length - 1 : index);
-  };
-
-  const openIssueTab = (issue: IssueSummary) => {
-    const { name, owner } = repository;
-    const type = issue.type === 'pr' ? 'pull' : 'issues';
-    const url = `https://github.com/${owner}/${name}/${type}/${issue.number}`;
-    chrome.tabs.create({ url });
   };
 
   // Not super efficient....convert to useEffect or something.
@@ -236,7 +230,7 @@ const RepositoryCard = ({
                           <Tooltip title={tooltipLink}>
                             <span
                               className="issue-link"
-                              onClick={() => openIssueTab(issue)}
+                              onClick={() => openIssueTab(issue, repository)}
                             >
                               #{issue.number} [{issue.type}]
                             </span>
