@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Repository } from '../../types';
+import 'fontsource-roboto';
 
 interface OwnerNameInterface {
   repository: Repository;

@@ -5,6 +5,7 @@ import RepositoryCardContainer from './RepositoryCardContainer';
 import RepositoryErrorCard from './RepositoryErrorCard';
 import RepositorySummaryCard from './RepositorySummaryCard';
 import RepositoryDetailsCard from './RepositoryDetailsCard';
+import 'fontsource-roboto';
 
 interface RepositoryCardInterface {
   repository: Repository;
@@ -16,6 +17,7 @@ type CardPage = 'Summary' | 'Details';
 const tooltipDelete = 'Delete';
 const tooltipLink = 'Open tab to GitHub';
 
+// createTheme uses Roboto font by default.
 const theme = createTheme();
 theme.typography.h6 = {
   fontSize: '0.9rem',

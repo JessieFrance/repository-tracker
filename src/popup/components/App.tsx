@@ -11,6 +11,7 @@ import {
 import { Add as AddIcon, Settings as SettingsIcon } from '@material-ui/icons';
 import 'fontsource-roboto';
 import './App.css';
+import 'fontsource-roboto';
 import { LocalStorageOptions, Repository } from '../../types';
 import {
   getStoredOptions,

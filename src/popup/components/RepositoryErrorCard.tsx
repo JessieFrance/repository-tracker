@@ -8,11 +8,11 @@ import {
 } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { DeleteForever as DeleteForeverIcon } from '@material-ui/icons';
-
 import { Repository } from '../../types';
 import RepositoryCardContainer from './RepositoryCardContainer';
 import CardOwnerName from './CardOwnerName';
 import './DeleteButton.css';
+import 'fontsource-roboto';
 
 interface RepositoryErrorCardInterface {
   theme: Theme;
