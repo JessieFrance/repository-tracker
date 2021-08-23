@@ -17,7 +17,9 @@ import { generateRandomID } from '../misc';
  *                                         for any new events
  * @return {Promise<void>}  Promise that fetches and saves data
  */
-export const updateDataForAlarm = async (notificationClearTime: number) => {
+export const updateDataForAlarm = async (
+  notificationClearTime: number,
+): Promise<void> => {
   const repositories = await getStoredRepositories();
   if (!repositories.length) {
     // If there were previously events on the badge,
@@ -51,7 +53,7 @@ export const updateDataForAlarm = async (notificationClearTime: number) => {
  * Initialize data in chrome local storage for use on installation
  * @return {Promise<void>}  Promise that saves initial data
  */
-export const initializeLocalStorageData = async () => {
+export const initializeLocalStorageData = async (): Promise<void> => {
   await setStoredOptions({
     apiKey: '',
     enableNotifications: true,

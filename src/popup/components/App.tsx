@@ -30,7 +30,7 @@ theme.typography.h1 = {
 
 type AddRepositoryState = 'loading' | 'error' | 'ready';
 
-const App = () => {
+const App = (): JSX.Element => {
   const [repositories, setRepositories] = useState<Repository[]>([]);
   const [options, setOptions] = useState<LocalStorageOptions | null>(null);
   const [owner, setOwner] = useState<string>('');

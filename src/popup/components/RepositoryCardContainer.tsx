@@ -7,7 +7,7 @@ interface RepositoryCardContainerInterface {
 
 const RepositoryCardContainer = ({
   children,
-}: RepositoryCardContainerInterface) => {
+}: RepositoryCardContainerInterface): JSX.Element => {
   return (
     <Box mx={'2px'} my={'5px'} width="100%">
       <Paper elevation={3}>
