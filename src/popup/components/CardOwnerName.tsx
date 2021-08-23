@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { Repository } from '../../types';
 import 'fontsource-roboto';
 
-interface OwnerNameInterface {
+export interface CardOwnerNameInterface {
   repository: Repository;
 }
 
@@ -18,7 +18,7 @@ theme.typography.subtitle1 = {
   fontWeight: 'lighter',
 };
 
-const CardOwnerName = ({ repository }: OwnerNameInterface): JSX.Element => {
+const CardOwnerName = ({ repository }: CardOwnerNameInterface): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <Grid item xs>
@@ -30,12 +30,16 @@ const CardOwnerName = ({ repository }: OwnerNameInterface): JSX.Element => {
           spacing={2}
         >
           <Grid item xs>
-            <Typography component="h5" variant="h5">
+            <Typography component="h5" variant="h5" data-testid="repo-name">
               {repository.name}
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="subtitle1" color="textSecondary">
+            <Typography
+              variant="subtitle1"
+              color="textSecondary"
+              data-testid="repo-owner"
+            >
               {repository.owner}
             </Typography>
           </Grid>

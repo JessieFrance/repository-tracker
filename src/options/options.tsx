@@ -44,7 +44,7 @@ theme.typography.h2 = {
   fontSize: '1.8rem',
 };
 
-const App = () => {
+const Options = (): JSX.Element => {
   const [options, setOptions] = useState<LocalStorageOptions | null>(null);
   const [showAPIKey, setShowAPIKey] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>('ready');
@@ -206,6 +206,8 @@ const App = () => {
   );
 };
 
+export default Options;
+
 const root = document.createElement('div');
 document.body.appendChild(root);
-ReactDOM.render(<App />, root);
+ReactDOM.render(<Options />, root);

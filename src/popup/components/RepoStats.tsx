@@ -7,7 +7,7 @@ import {
 import './RepoStats.css';
 import 'fontsource-roboto';
 
-interface RepoStatsInterface {
+export interface RepoStatsInterface {
   decrementStatsIndex: () => void;
   incrementStatsIndex: () => void;
   statType: string;
@@ -48,6 +48,7 @@ const RepoStats = ({
                 variant="h6"
                 className="display-stat"
                 align="center"
+                data-testid="stat-type"
               >
                 {statType}
               </Typography>
@@ -60,7 +61,11 @@ const RepoStats = ({
           </Grid>
         </Grid>
         <Grid item>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography
+            variant="subtitle1"
+            color="textSecondary"
+            data-testid="stats"
+          >
             {stats}
           </Typography>
         </Grid>

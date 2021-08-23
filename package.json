@@ -6,18 +6,29 @@
     "dev": "webpack --watch --progress --config webpack.dev.js",
     "build": "webpack --watch --progress --config webpack.prod.js",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "lint:check": "eslint '*/**/*.{js,ts,tsx}'",    
+    "lint:check": "eslint '*/**/*.{js,ts,tsx}'",
+    "test": "jest",
+    "test:watch": "jest --watch",    
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
-  "author": "Jessie France (https://github.com/jessiefrance)",  
+  "author": "Jessie France (https://github.com/jessiefrance)",
   "license": "MIT",
   "bugs": "https://github.com/JessieFrance/repository-tracker/issues",
   "homepage": "https://github.com/JessieFrance/repository-tracker",
   "devDependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "@babel/preset-typescript": "^7.15.0",
+    "@babel/runtime": "^7.15.3",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
     "@types/chrome": "^0.0.134",
+    "@types/jest": "^27.0.1",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.28.3",
@@ -32,6 +43,8 @@
     "fontsource-roboto": "^4.0.0",
     "html-webpack-plugin": "^4.5.2",
     "husky": "^7.0.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.0.6",
     "lint-staged": "^11.0.1",
     "prettier": "^2.3.2",
     "react": "^17.0.2",
@@ -43,6 +56,16 @@
     "webpack": "^5.35.1",
     "webpack-cli": "^4.6.0",
     "webpack-merge": "^5.7.3"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest-setup.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy",
+      "fontsource-roboto": "identity-obj-proxy",      
+      "\\.(jpg|jpeg|png|gif)$": "<rootDir>/src/__mocks__/fileMock.ts"
+    }    
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
