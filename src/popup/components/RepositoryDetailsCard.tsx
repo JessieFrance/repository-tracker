@@ -7,10 +7,8 @@ import {
   Tooltip,
   Typography,
 } from '@material-ui/core';
-
 import { ArrowBack as ArrowBackIcon } from '@material-ui/icons';
-import { openIssueTab } from '../../utils/chrome';
-import { Repository } from '../../types';
+import { Repository, IssueSummary } from '../../types';
 import { capitalize } from '../../utils/misc';
 import './RepositoryDetailsCard.css';
 import './ChangePageButton.css';
@@ -22,6 +20,19 @@ interface RepositoryDetailsCardInterface {
   tooltipLink: string;
   repository: Repository;
 }
+
+/**
+ * Opens a chrome tab for an issue in a repository.
+ * @param  {IssueSummary}  issue Summary of an issue object
+ * @param  {Repository}    repository Repository object
+ * @return {Promise<void>}  Promise that opens a chrome tab for that issue
+ */
+const openIssueTab = (issue: IssueSummary, repository: Repository) => {
+  const { name, owner } = repository;
+  const type = issue.type === 'pr' ? 'pull' : 'issues';
+  const url = `https://github.com/${owner}/${name}/${type}/${issue.number}`;
+  chrome.tabs.create({ url });
+};
 
 const RepositoryDetailsCard = ({
   title,

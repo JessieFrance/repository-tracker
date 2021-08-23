@@ -61,19 +61,6 @@ export const initializeLocalStorageData = async () => {
 };
 
 /**
- * Opens a chrome tab for an issue in a repository.
- * @param  {IssueSummary}  issue Summary of an issue object
- * @param  {Repository}    repository Repository object
- * @return {Promise<void>}  Promise that opens a chrome tab for that issue
- */
-export const openIssueTab = (issue: IssueSummary, repository: Repository) => {
-  const { name, owner } = repository;
-  const type = issue.type === 'pr' ? 'pull' : 'issues';
-  const url = `https://github.com/${owner}/${name}/${type}/${issue.number}`;
-  chrome.tabs.create({ url });
-};
-
-/**
  * Update the stored badge number and set the badge text
  * @param  {number}         badgeNumber Badge number to save and set as text
  * @return {Promise<void>}  Promise that resolves if badge number is saved
