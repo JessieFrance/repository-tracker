@@ -12,7 +12,12 @@ import { Add as AddIcon, Settings as SettingsIcon } from '@material-ui/icons';
 import 'fontsource-roboto';
 import './App.css';
 import 'fontsource-roboto';
-import { LocalStorageOptions, Repository } from '../../types';
+import {
+  ChromeRequest,
+  LocalStorageOptions,
+  Messages,
+  Repository,
+} from '../../types';
 import {
   getStoredOptions,
   getStoredRepositories,
@@ -39,9 +44,21 @@ const App = (): JSX.Element => {
     useState<AddRepositoryState>('ready');
   const [addRepoError, setAddRepoError] = useState<string>('');
 
+  // Handle Chrome API messages.
+  const handleMessages = ({ message }: ChromeRequest) => {
+    if (message === Messages.BACKGROUND_REPOSITORIES_UPDATED) {
+      getStoredRepositories().then((repos) => setRepositories(repos));
+    }
+  };
+
   useEffect(() => {
     getStoredRepositories().then((repos) => setRepositories(repos));
     getStoredOptions().then((options) => setOptions(options));
+    // Add chrome message listener and cleanup.
+    chrome.runtime.onMessage.addListener(handleMessages);
+    return () => {
+      chrome.runtime.onMessage.removeListener(handleMessages);
+    };
   }, []);
 
   const handleRepositoryDeleteButtonClick = (index: number) => {
@@ -49,6 +66,10 @@ const App = (): JSX.Element => {
     const updatedRepositories = [...repositories];
     setStoredRepositories(updatedRepositories).then(() => {
       setRepositories(updatedRepositories);
+    });
+    // Message other Chrome pages to let them know.
+    chrome.runtime.sendMessage({
+      message: Messages.POPUP_REPOSITORIES_UPDATED,
     });
   };
 
@@ -63,10 +84,6 @@ const App = (): JSX.Element => {
     if (alreadyHaveRepo) {
       setAddRepoStatus('error');
       setAddRepoError('already tracking this repository');
-      console.log(
-        'repositories logged from within alreadyHaveRepo: ',
-        repositories,
-      );
       return;
     }
     setAddRepoStatus('loading');
@@ -93,6 +110,11 @@ const App = (): JSX.Element => {
     setOwner('');
     setName('');
     setAddRepoStatus('ready');
+    console.log('sending add message from popup');
+    // Message other Chrome pages.
+    chrome.runtime.sendMessage({
+      message: Messages.POPUP_REPOSITORIES_UPDATED,
+    });
   };
 
   const handleOnOwnerChange = (owner: string) => {

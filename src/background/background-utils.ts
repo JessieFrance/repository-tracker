@@ -5,10 +5,33 @@ import {
   setStoredBadgeNumber,
   setStoredOptions,
   setStoredRepositories,
-} from '../storage';
-import { IssueSummary, Repository } from '../../types';
-import { getRepositoryTrackingData } from '../api';
-import { generateRandomID } from '../misc';
+} from '../utils/storage';
+import { ChromeRequest, IssueSummary, Messages, Repository } from '../types';
+import { getRepositoryTrackingData } from '../utils/api';
+import { generateRandomID } from '../utils/misc';
+
+/**
+ * Loads repositories and updates badge
+ * @return {Promise<void>}  Promise that loads repositories and updates badge
+ */
+const loadRepositoriesAndUpdateBadge = async () => {
+  const repositories = await getStoredRepositories();
+  const badgeNum = countAllRepositoryEvents(repositories);
+  await updateBadge(badgeNum);
+};
+
+/**
+ * Handle incoming messages for the background script.
+ * @param  {ChromeRequest}  Object Object containing message for background
+ * @return {Promise<void>}  Promise that processes message request
+ */
+export const handleMessages = async ({
+  message,
+}: ChromeRequest): Promise<void> => {
+  if (message === Messages.POPUP_REPOSITORIES_UPDATED) {
+    await loadRepositoriesAndUpdateBadge();
+  }
+};
 
 /**
  * Re-fetch and update data fields for a chrome alarm event and save to storage.
@@ -47,6 +70,10 @@ export const updateDataForAlarm = async (
     const title = generateTitleByType(newData);
     renderNotification(title, notificationItems, notificationClearTime);
   }
+  // Message other chrome pages on repository updates.
+  chrome.runtime.sendMessage({
+    message: Messages.BACKGROUND_REPOSITORIES_UPDATED,
+  });
 };
 
 /**
@@ -67,7 +94,7 @@ export const initializeLocalStorageData = async (): Promise<void> => {
  * @param  {number}         badgeNumber Badge number to save and set as text
  * @return {Promise<void>}  Promise that resolves if badge number is saved
  */
-const updateBadge = async (badgeNumber: number): Promise<void> => {
+export const updateBadge = async (badgeNumber: number): Promise<void> => {
   await setStoredBadgeNumber(badgeNumber);
   chrome.action.setBadgeText({
     text: `${badgeNumber}`,
@@ -98,7 +125,6 @@ const fetchBadgeAndNotificationData = async (
     // (1) ran out of GitHub requests, (2) APiKey expired or got cancelled,
     // (4) repository got deleted or was made private, (4) bad internet
     // connection
-    if (repository.error) continue;
 
     // Get relevant data for this repository and set it.
     const { trackingData, etag, status, error } =
@@ -107,12 +133,10 @@ const fetchBadgeAndNotificationData = async (
     repository.trackingData = trackingData;
     repository.error = error;
 
-    // Continue if error or no updates on GitHub server (304), or
-    // if there's an error.
-    if (error || status === 304) {
-      if (repository.justAdded) {
-        repository.justAdded = false;
-      }
+    // Continue if error or if status is 304 (no update) and
+    // the repository was not just added. If repository was just
+    // added we should continue to get most recent date below.
+    if (error || (status === 304 && !repository.justAdded)) {
       continue;
     }
 
@@ -177,7 +201,9 @@ const extractNewDataForNotification = (
  * @param  {Repository[]} repositories Array of repositories
  * @return {number}                    Total number of tracking data items
  */
-const countAllRepositoryEvents = (repositories: Repository[]): number => {
+export const countAllRepositoryEvents = (
+  repositories: Repository[],
+): number => {
   return repositories.reduce((acc, repo) => {
     acc = acc + repo.trackingData.length;
     return acc;

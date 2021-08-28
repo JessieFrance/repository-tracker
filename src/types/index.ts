@@ -50,3 +50,12 @@ export interface RepositoryTrackingData {
   status: number;
   error: null | string;
 }
+
+export interface ChromeRequest {
+  message: string;
+}
+
+export enum Messages {
+  POPUP_REPOSITORIES_UPDATED = 'popup_repositories_updated',
+  BACKGROUND_REPOSITORIES_UPDATED = 'background_repositories_updated',
+}
