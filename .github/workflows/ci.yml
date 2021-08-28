@@ -1,0 +1,26 @@
+name: Build and Test
+
+on:
+  push:
+    branches: # Run actions when code is committed to main branch
+      - main
+  pull_request:
+    branches: # Run actions when a PR is pushed based on main branch
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code    
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Linting      
+        run: npm run lint:check
+      - name: Run Tests
+        run: npm run test
