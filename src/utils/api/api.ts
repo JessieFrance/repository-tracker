@@ -6,8 +6,9 @@ import {
 } from '../../types';
 import { filterLastDay } from './timeFilters';
 
-// GitHub API URL constant.
+// GitHub constants
 const BASE_URL = 'https://api.github.com';
+const PER_PAGE = 100; // results per page. 100 is maximum.
 
 interface ApiFetchResult {
   data: ApiData[];
@@ -28,7 +29,7 @@ const fetchApiData = async (
   apiKey?: string,
 ): Promise<ApiFetchResult> => {
   const { owner, name } = repository;
-  const url = `${BASE_URL}/repos/${owner}/${name}/issues?state=all`;
+  const url = `${BASE_URL}/repos/${owner}/${name}/issues?state=all&per_page=${PER_PAGE}`;
 
   const requestHeaders = new Headers();
   if (apiKey && apiKey !== '') {
