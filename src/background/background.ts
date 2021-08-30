@@ -1,7 +1,8 @@
 import {
+  handleMessages,
   initializeLocalStorageData,
   updateDataForAlarm,
-} from '../utils/chrome';
+} from './background-utils';
 
 // Key constants
 const NOTIFICATION_INTERVAL_TIME = 1; // minutes
@@ -16,6 +17,7 @@ chrome.runtime.onInstalled.addListener(async () => {
   chrome.alarms.create({
     periodInMinutes: NOTIFICATION_INTERVAL_TIME,
   });
+  chrome.runtime.onMessage.addListener(handleMessages);
 });
 
 /**
