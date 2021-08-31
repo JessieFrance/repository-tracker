@@ -4,7 +4,7 @@
   "description": "A chrome extension to track repository activity on GitHub",
   "scripts": {
     "dev": "webpack --watch --progress --config webpack.dev.js",
-    "build": "webpack --watch --progress --config webpack.prod.js",
+    "build": "webpack --progress --config webpack.prod.js",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "lint:check": "eslint '*/**/*.{js,ts,tsx}'",
     "test": "jest",
