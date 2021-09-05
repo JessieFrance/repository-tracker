@@ -1,10 +1,8 @@
-# repository-tracker
+# <img src="src/static/icon.png" width="45" align="left"> Repository Tracker
 
 [![Actions Status](https://github.com/JessieFrance/repository-tracker/workflows/Build%20and%20Test/badge.svg)](https://github.com/JessieFrance/repository-tracker/actions)
 [![GitHub license](https://img.shields.io/github/license/JessieFrance/repository-tracker?style=flat-square)](https://github.com/JessieFrance/repository-tracker/blob/main/LICENSE)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pidkkdkplogkjahekhddnikenfplmocg?style=flat-square)](https://chrome.google.com/webstore/detail/repository-tracker/pidkkdkplogkjahekhddnikenfplmocg)
-
-# <img src="src/static/icon.png" width="45" align="left"> Repository Tracker
 
 > A free, Chrome extension that lets you track issues and pull requests in your favorite GitHub repositories.
 
@@ -16,7 +14,7 @@ Repository Tracker lets you add your favorite GitHub repositories, and then trac
 
 If you would like to try this extension, please download it for free from the Chrome store [here](https://chrome.google.com/webstore/detail/repository-tracker/pidkkdkplogkjahekhddnikenfplmocg). 
 
-GitHub limits the number of API requests this extension can make to its API. Additionally, you may wish to track your team's private repositories. For these reasons, we recommend getting your own GitHub API key with repository level access following these (steps from GitHub)[https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token].
+GitHub limits the number of API requests this extension can make to its API. Additionally, you may wish to track your team's private repositories. For these reasons, we recommend getting your own GitHub API key with repository level access following these [steps from GitHub](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 After generating your own API key, you can open Repository Tracker, click the Options icon to go to the Options Page, paste the API key, and save other preferences.
 
