@@ -8,7 +8,7 @@
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "lint:check": "eslint '*/**/*.{js,ts,tsx}'",
     "test": "jest",
-    "test:watch": "jest --watch",    
+    "test:watch": "jest --watch",
     "prepare": "husky install",
     "pre-commit": "lint-staged"
   },
@@ -63,9 +63,9 @@
     ],
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy",
-      "fontsource-roboto": "identity-obj-proxy",      
+      "fontsource-roboto": "identity-obj-proxy",
       "\\.(jpg|jpeg|png|gif)$": "<rootDir>/src/__mocks__/fileMock.ts"
-    }    
+    }
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
