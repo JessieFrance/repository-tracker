@@ -6,6 +6,8 @@
 
 > A free, Chrome extension that lets you track issues and pull requests in your favorite GitHub repositories.
 
+![video](https://user-images.githubusercontent.com/64499366/151725384-8f219da2-144f-4aaf-aea3-feafb4dd92af.gif)
+
 ## Introduction
 
 Repository Tracker lets you add your favorite GitHub repositories, and then tracks pull requests and issues that occurred in the last day. You can optionally receive popup notifications to let you know when someone files a new issue or pull request in one of the repositories you track. 
