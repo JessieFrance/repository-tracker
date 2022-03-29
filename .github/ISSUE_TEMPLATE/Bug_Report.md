@@ -23,7 +23,7 @@ A clear and concise description of what you expected to happen.
 Steps to reproduce the behavior:
 
 1. Open Chrome.
-3. Please add more steps here...
+2. Please add more steps here...
 
 **Your Environment:**
 
