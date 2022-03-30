@@ -110,7 +110,7 @@ const App = (): JSX.Element => {
     setOwner('');
     setName('');
     setAddRepoStatus('ready');
-    console.log('sending add message from popup');
+
     // Message other Chrome pages.
     chrome.runtime.sendMessage({
       message: Messages.POPUP_REPOSITORIES_UPDATED,
