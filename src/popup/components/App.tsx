@@ -68,9 +68,16 @@ const App = (): JSX.Element => {
       setRepositories(updatedRepositories);
     });
     // Message other Chrome pages to let them know.
-    chrome.runtime.sendMessage({
-      message: Messages.POPUP_REPOSITORIES_UPDATED,
-    });
+    chrome.runtime.sendMessage(
+      {
+        message: Messages.POPUP_REPOSITORIES_UPDATED,
+      },
+      () => {
+        // Silence possible errors so they do not pollute the user experience.
+        if (chrome.runtime.lastError) {
+        }
+      },
+    );
   };
 
   const handleOnAddRepositoryClick = async () => {
@@ -112,9 +119,16 @@ const App = (): JSX.Element => {
     setAddRepoStatus('ready');
 
     // Message other Chrome pages.
-    chrome.runtime.sendMessage({
-      message: Messages.POPUP_REPOSITORIES_UPDATED,
-    });
+    chrome.runtime.sendMessage(
+      {
+        message: Messages.POPUP_REPOSITORIES_UPDATED,
+      },
+      () => {
+        // Silence possible errors so they do not pollute the user experience.
+        if (chrome.runtime.lastError) {
+        }
+      },
+    );
   };
 
   const handleOnOwnerChange = (owner: string) => {
