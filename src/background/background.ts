@@ -17,7 +17,12 @@ chrome.runtime.onInstalled.addListener(async () => {
   chrome.alarms.create({
     periodInMinutes: NOTIFICATION_INTERVAL_TIME,
   });
-  chrome.runtime.onMessage.addListener(handleMessages);
+  // Get the message, ignore the sender, and get the callback function
+  // to acknowledge message receipt.
+  chrome.runtime.onMessage.addListener((message, _, sendResponse) => {
+    handleMessages(message);
+    sendResponse();
+  });
 });
 
 /**

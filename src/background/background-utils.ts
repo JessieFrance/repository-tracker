@@ -71,9 +71,16 @@ export const updateDataForAlarm = async (
     renderNotification(title, notificationItems, notificationClearTime);
   }
   // Message other chrome pages on repository updates.
-  chrome.runtime.sendMessage({
-    message: Messages.BACKGROUND_REPOSITORIES_UPDATED,
-  });
+  chrome.runtime.sendMessage(
+    {
+      message: Messages.BACKGROUND_REPOSITORIES_UPDATED,
+    },
+    () => {
+      // Silence possible errors so they do not pollute the user experience.
+      if (chrome.runtime.lastError) {
+      }
+    },
+  );
 };
 
 /**
