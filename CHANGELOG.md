@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 (2022-04-24)
+
+- Update browserlists, #9
+- Improve error handling, #8
+
 ## 1.0.2 (2022-03-30)
 
 - Remove a console log
