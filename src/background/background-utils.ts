@@ -273,7 +273,7 @@ const renderNotification = (
   const type = 'list';
   const message = 'Recent GitHub Repository Activity';
   const iconUrl = 'icon.png';
-  const opt: chrome.notifications.NotificationOptions = {
+  const opt: chrome.notifications.NotificationOptions<true> = {
     type,
     title,
     message,
