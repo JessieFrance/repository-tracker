@@ -106,6 +106,9 @@ export const updateBadge = async (badgeNumber: number): Promise<void> => {
   chrome.action.setBadgeText({
     text: `${badgeNumber}`,
   });
+
+  // Specify background and text color (necessary for Chrome ~102+)
+  chrome.action.setBadgeBackgroundColor({ color: '#0000FF' });
 };
 
 interface BadgeNotificationResult {
