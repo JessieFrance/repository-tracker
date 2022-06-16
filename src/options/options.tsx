@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import {
   Box,
@@ -208,6 +208,7 @@ const Options = (): JSX.Element => {
 
 export default Options;
 
-const root = document.createElement('div');
-document.body.appendChild(root);
-ReactDOM.render(<Options />, root);
+const container = document.createElement('div');
+document.body.appendChild(container);
+const root = createRoot(container);
+root.render(<Options />);
