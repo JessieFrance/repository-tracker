@@ -5,7 +5,7 @@ import RepositoryCardContainer from './RepositoryCardContainer';
 import RepositoryErrorCard from './RepositoryErrorCard';
 import RepositorySummaryCard from './RepositorySummaryCard';
 import RepositoryDetailsCard from './RepositoryDetailsCard';
-import 'fontsource-roboto';
+import '@fontsource/roboto';
 
 interface RepositoryCardInterface {
   repository: Repository;

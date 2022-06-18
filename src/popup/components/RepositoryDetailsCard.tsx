@@ -12,7 +12,7 @@ import { Repository, IssueSummary } from '../../types';
 import { capitalize } from '../../utils/misc';
 import './RepositoryDetailsCard.css';
 import './ChangePageButton.css';
-import 'fontsource-roboto';
+import '@fontsource/roboto';
 
 interface RepositoryDetailsCardInterface {
   title: string;

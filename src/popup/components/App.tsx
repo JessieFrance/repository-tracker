@@ -9,9 +9,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Add as AddIcon, Settings as SettingsIcon } from '@material-ui/icons';
-import 'fontsource-roboto';
+import '@fontsource/roboto';
 import './App.css';
-import 'fontsource-roboto';
 import {
   ChromeRequest,
   LocalStorageOptions,

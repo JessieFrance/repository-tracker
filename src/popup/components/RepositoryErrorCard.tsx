@@ -12,7 +12,7 @@ import { Repository } from '../../types';
 import RepositoryCardContainer from './RepositoryCardContainer';
 import CardOwnerName from './CardOwnerName';
 import './DeleteButton.css';
-import 'fontsource-roboto';
+import '@fontsource/roboto';
 
 interface RepositoryErrorCardInterface {
   theme: Theme;
