@@ -1,10 +1,10 @@
 import React from 'react';
-import { Grid, IconButton, Tooltip } from '@material-ui/core';
+import { Grid, IconButton, Tooltip } from '@mui/material';
 
 import {
   ArrowForward as ArrowForwardIcon,
   DeleteForever as DeleteForeverIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { Repository } from '../../types';
 import RepoStats from './RepoStats';
 import CardOwnerName from './CardOwnerName';
@@ -59,14 +59,14 @@ const RepositorySummaryCard = ({
         >
           <Grid item xs>
             <Tooltip title={tooltipDelete}>
-              <IconButton onClick={onDelete}>
+              <IconButton onClick={onDelete} size="large">
                 <DeleteForeverIcon className="delete-button" />
               </IconButton>
             </Tooltip>
           </Grid>
           <Grid item xs>
             <Tooltip title={currentCard}>
-              <IconButton onClick={incrementCardIndex}>
+              <IconButton onClick={incrementCardIndex} size="large">
                 <ArrowForwardIcon className="change-page-button" />
               </IconButton>
             </Tooltip>

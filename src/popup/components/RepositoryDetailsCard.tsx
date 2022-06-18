@@ -6,8 +6,8 @@ import {
   IconButton,
   Tooltip,
   Typography,
-} from '@material-ui/core';
-import { ArrowBack as ArrowBackIcon } from '@material-ui/icons';
+} from '@mui/material';
+import { ArrowBack as ArrowBackIcon } from '@mui/icons-material';
 import { Repository, IssueSummary } from '../../types';
 import { capitalize } from '../../utils/misc';
 import './RepositoryDetailsCard.css';
@@ -43,7 +43,7 @@ const RepositoryDetailsCard = ({
   return (
     <Grid container>
       <Tooltip title={title}>
-        <IconButton onClick={decrementCardIndex}>
+        <IconButton onClick={decrementCardIndex} size="large">
           <ArrowBackIcon className="change-page-button" />
         </IconButton>
       </Tooltip>

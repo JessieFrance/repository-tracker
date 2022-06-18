@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from '@mui/material/styles';
 import { Repository } from '../../types';
 import RepositoryCardContainer from './RepositoryCardContainer';
 import RepositoryErrorCard from './RepositoryErrorCard';
 import RepositorySummaryCard from './RepositorySummaryCard';
 import RepositoryDetailsCard from './RepositoryDetailsCard';
 import '@fontsource/roboto';
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 interface RepositoryCardInterface {
   repository: Repository;
@@ -83,31 +93,33 @@ const RepositoryCard = ({
   const shouldRender = cardArr[cardIndex];
 
   return (
-    <ThemeProvider theme={theme}>
-      <RepositoryCardContainer>
-        {shouldRender === 'Summary' && (
-          <RepositorySummaryCard
-            decrementStatsIndex={decrementStatsIndex}
-            incrementStatsIndex={incrementStatsIndex}
-            incrementCardIndex={incrementCardIndex}
-            onDelete={onDelete}
-            tooltipDelete={tooltipDelete}
-            statType={statsArr[statIndex]}
-            stats={statCounts[statIndex]}
-            currentCard={cardArr[cardIndex + 1]}
-            repository={repository}
-          />
-        )}
-        {shouldRender === 'Details' && (
-          <RepositoryDetailsCard
-            title={cardArr[cardIndex - 1]}
-            decrementCardIndex={decrementCardIndex}
-            tooltipLink={tooltipLink}
-            repository={repository}
-          />
-        )}
-      </RepositoryCardContainer>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <RepositoryCardContainer>
+          {shouldRender === 'Summary' && (
+            <RepositorySummaryCard
+              decrementStatsIndex={decrementStatsIndex}
+              incrementStatsIndex={incrementStatsIndex}
+              incrementCardIndex={incrementCardIndex}
+              onDelete={onDelete}
+              tooltipDelete={tooltipDelete}
+              statType={statsArr[statIndex]}
+              stats={statCounts[statIndex]}
+              currentCard={cardArr[cardIndex + 1]}
+              repository={repository}
+            />
+          )}
+          {shouldRender === 'Details' && (
+            <RepositoryDetailsCard
+              title={cardArr[cardIndex - 1]}
+              decrementCardIndex={decrementCardIndex}
+              tooltipLink={tooltipLink}
+              repository={repository}
+            />
+          )}
+        </RepositoryCardContainer>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 export default RepositoryCard;

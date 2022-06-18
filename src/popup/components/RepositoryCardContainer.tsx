@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, CardContent, Paper } from '@material-ui/core';
+import { Box, Card, CardContent, Paper } from '@mui/material';
 
 interface RepositoryCardContainerInterface {
   children: React.ReactNode;

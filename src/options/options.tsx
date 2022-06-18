@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from '@mui/material/styles';
 import {
   Box,
   Button,
@@ -16,18 +21,24 @@ import {
   Switch,
   Tooltip,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Save as SaveIcon,
   Info as InfoIcon,
   Visibility,
   VisibilityOff,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import './options.css';
 import '@fontsource/roboto';
 import { getStoredOptions, setStoredOptions } from '../utils/storage';
 import { LocalStorageOptions } from '../types';
 import { checkAPIkey } from '../utils/api';
+import '@mui/styles';
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 const SUCCESS_RESET_TIME = 8000; // seconds
 const GITHUB_INFO_URL =
@@ -117,92 +128,102 @@ const Options = (): JSX.Element => {
     'This option lets you make more GitHub API requests. Click to get your own API Key from GitHub.';
 
   return (
-    <ThemeProvider theme={theme}>
-      <Box mx="10%" my="2%">
-        <Paper elevation={3}>
-          <Grid container direction="column" spacing={4}>
-            <Grid item>
-              <Typography variant="h1">Repository Tracker Options</Typography>
-            </Grid>
-            <Grid container className="api-options" direction="row" spacing={4}>
-              <Typography variant="h2">Set a GitHub API Key</Typography>
-              <Tooltip title={tooltipInfo} className="my-tooltip">
-                <Fab color="primary" size="small">
-                  <InfoIcon onClick={handleInfoButtonClick} />
-                </Fab>
-              </Tooltip>
-            </Grid>
-            <Grid item className="select-options">
-              <InputLabel htmlFor="component-helper">API Key</InputLabel>
-              <Input
-                id="api-input"
-                type={showAPIKey ? 'text' : 'password'}
-                value={options.apiKey}
-                onChange={(event) => handleApiKeyChange(event.target.value)}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton onClick={() => setShowAPIKey(!showAPIKey)}>
-                      {showAPIKey ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-            </Grid>
-            <Grid item className="select-options">
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      color="primary"
-                      checked={options.enableNotifications}
-                    />
-                  }
-                  onChange={(event, clicked) =>
-                    handleEnableNotificationsChange(clicked)
-                  }
-                  label="Enable Notifications"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid
-              container
-              justifyContent="flex-start"
-              className="save-error-success"
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={handleSaveButtonClick}
-                startIcon={<SaveIcon />}
-                disabled={isFieldDisabled}
-                className="save-options"
+    <StyledEngineProvider injectFirst={false}>
+      <ThemeProvider theme={theme}>
+        <Box mx="10%" my="2%">
+          <Paper elevation={3}>
+            <Grid container direction="column" spacing={4}>
+              <Grid item>
+                <Typography variant="h1">Repository Tracker Options</Typography>
+              </Grid>
+              <Grid
+                container
+                className="api-options"
+                direction="row"
+                spacing={4}
               >
-                Save
-              </Button>
-              {formState === 'error' && (
-                <Typography
-                  variant="subtitle1"
-                  className="error-success"
-                  color="error"
+                <Typography variant="h2">Set a GitHub API Key</Typography>
+                <Tooltip title={tooltipInfo} className="my-tooltip">
+                  <Fab color="primary" size="small">
+                    <InfoIcon onClick={handleInfoButtonClick} />
+                  </Fab>
+                </Tooltip>
+              </Grid>
+              <Grid item className="select-options">
+                <InputLabel htmlFor="component-helper">API Key</InputLabel>
+                <Input
+                  id="api-input"
+                  type={showAPIKey ? 'text' : 'password'}
+                  value={options.apiKey}
+                  onChange={(event) => handleApiKeyChange(event.target.value)}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowAPIKey(!showAPIKey)}
+                        size="large"
+                      >
+                        {showAPIKey ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </Grid>
+              <Grid item className="select-options">
+                <FormGroup>
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        color="primary"
+                        checked={options.enableNotifications}
+                      />
+                    }
+                    onChange={(_, clicked) =>
+                      handleEnableNotificationsChange(clicked)
+                    }
+                    label="Enable Notifications"
+                  />
+                </FormGroup>
+              </Grid>
+              <Grid
+                container
+                justifyContent="flex-start"
+                className="save-error-success"
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  onClick={handleSaveButtonClick}
+                  startIcon={<SaveIcon />}
+                  disabled={isFieldDisabled}
+                  id="save-options"
                 >
-                  Unable to Save Settings: {apiErrMsg}
-                </Typography>
-              )}
-              {formState === 'success' && (
-                <Typography
-                  variant="subtitle1"
-                  className="error-success"
-                  id="success"
-                >
-                  Success!
-                </Typography>
-              )}
+                  Save
+                </Button>
+                {formState === 'error' && (
+                  <Typography
+                    variant="subtitle1"
+                    className="error-success"
+                    color="error"
+                  >
+                    Unable to Save Settings: {apiErrMsg}
+                  </Typography>
+                )}
+                {formState === 'success' && (
+                  <Typography
+                    variant="subtitle1"
+                    className="error-success"
+                    id="success"
+                  >
+                    Success!
+                  </Typography>
+                )}
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-      </Box>
-    </ThemeProvider>
+          </Paper>
+        </Box>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

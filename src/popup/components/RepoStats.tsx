@@ -1,9 +1,9 @@
 import React from 'react';
-import { Grid, IconButton, Typography } from '@material-ui/core';
+import { Grid, IconButton, Typography } from '@mui/material';
 import {
   ArrowLeft as ArrowLeftIcon,
   ArrowRight as ArrowRightIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import './RepoStats.css';
 import '@fontsource/roboto';
 
@@ -38,7 +38,7 @@ const RepoStats = ({
             justifyContent="space-around"
           >
             <Grid item xs={4}>
-              <IconButton onClick={decrementStatsIndex}>
+              <IconButton onClick={decrementStatsIndex} size="large">
                 <ArrowLeftIcon />
               </IconButton>
             </Grid>
@@ -54,7 +54,7 @@ const RepoStats = ({
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <IconButton onClick={incrementStatsIndex}>
+              <IconButton onClick={incrementStatsIndex} size="large">
                 <ArrowRightIcon />
               </IconButton>
             </Grid>

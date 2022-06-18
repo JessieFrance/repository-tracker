@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+} from '@mui/material/styles';
 import {
   Box,
   Grid,
@@ -7,8 +12,8 @@ import {
   Paper,
   Tooltip,
   Typography,
-} from '@material-ui/core';
-import { Add as AddIcon, Settings as SettingsIcon } from '@material-ui/icons';
+} from '@mui/material';
+import { Add as AddIcon, Settings as SettingsIcon } from '@mui/icons-material';
 import '@fontsource/roboto';
 import './App.css';
 import {
@@ -26,6 +31,11 @@ import { getBlankRepository } from '../../utils/misc';
 import { getRepositoryTrackingData } from '../../utils/api';
 import RepositoryCard from './RepositoryCard';
 import SearchOwnerName from './SearchOwnerName';
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
 
 const theme = createTheme();
 theme.typography.h1 = {
@@ -156,49 +166,58 @@ const App = (): JSX.Element => {
     addRepoStatus === 'error' ? addRepoError : 'Add Repository';
   const placeholderColor = addRepoStatus === 'error' ? 'error' : 'inherit';
   return (
-    <ThemeProvider theme={theme}>
-      <Box mx="5px" my="5px">
-        <Grid container justifyContent="space-evenly">
-          <Grid container justifyContent="space-between" alignItems="baseline">
-            <Typography variant="h1">Repository Tracker</Typography>
-            <Tooltip title={settingsTooltip}>
-              <IconButton onClick={() => chrome.runtime.openOptionsPage()}>
-                <SettingsIcon className="settings-button" />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-          <Paper elevation={3}>
-            <Typography id="add-repo" color={placeholderColor}>
-              {placeholder}
-            </Typography>
-            <Box display="flex" justifyContent="center">
-              <SearchOwnerName
-                owner={owner}
-                name={name}
-                onOwnerChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  handleOnOwnerChange(event.target.value)
-                }
-                onNameChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  handleOnNameChange(event.target.value)
-                }
-              />
-              <Tooltip title={addTooltip}>
-                <IconButton onClick={handleOnAddRepositoryClick}>
-                  <AddIcon className="add-button" />
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <Box mx="5px" my="5px">
+          <Grid container justifyContent="space-evenly">
+            <Grid
+              container
+              justifyContent="space-between"
+              alignItems="baseline"
+            >
+              <Typography variant="h1">Repository Tracker</Typography>
+              <Tooltip title={settingsTooltip}>
+                <IconButton
+                  onClick={() => chrome.runtime.openOptionsPage()}
+                  size="large"
+                >
+                  <SettingsIcon className="settings-button" />
                 </IconButton>
               </Tooltip>
-            </Box>
-          </Paper>
-          {repositories.map((repository, index) => (
-            <RepositoryCard
-              repository={repository}
-              key={index}
-              onDelete={() => handleRepositoryDeleteButtonClick(index)}
-            />
-          ))}
-        </Grid>
-      </Box>
-    </ThemeProvider>
+            </Grid>
+            <Paper elevation={3}>
+              <Typography id="add-repo" color={placeholderColor}>
+                {placeholder}
+              </Typography>
+              <Box display="flex" justifyContent="center">
+                <SearchOwnerName
+                  owner={owner}
+                  name={name}
+                  onOwnerChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    handleOnOwnerChange(event.target.value)
+                  }
+                  onNameChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                    handleOnNameChange(event.target.value)
+                  }
+                />
+                <Tooltip title={addTooltip}>
+                  <IconButton onClick={handleOnAddRepositoryClick} size="large">
+                    <AddIcon className="add-button" />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            </Paper>
+            {repositories.map((repository, index) => (
+              <RepositoryCard
+                repository={repository}
+                key={index}
+                onDelete={() => handleRepositoryDeleteButtonClick(index)}
+              />
+            ))}
+          </Grid>
+        </Box>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 
