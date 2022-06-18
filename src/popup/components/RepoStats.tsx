@@ -5,7 +5,7 @@ import {
   ArrowRight as ArrowRightIcon,
 } from '@material-ui/icons';
 import './RepoStats.css';
-import 'fontsource-roboto';
+import '@fontsource/roboto';
 
 export interface RepoStatsInterface {
   decrementStatsIndex: () => void;

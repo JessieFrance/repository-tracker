@@ -24,7 +24,7 @@ import {
   VisibilityOff,
 } from '@material-ui/icons';
 import './options.css';
-import 'fontsource-roboto';
+import '@fontsource/roboto';
 import { getStoredOptions, setStoredOptions } from '../utils/storage';
 import { LocalStorageOptions } from '../types';
 import { checkAPIkey } from '../utils/api';
