@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4 (2022-06-18)
+
+- Update deprecated fontsource-roboto package to @fontsource/robo, #12
+- Update to React 18, #11
+- Fix badge background color on new Chrome versions, #10
+
 ## 1.0.3 (2022-04-24)
 
 - Update browserlists, #9
