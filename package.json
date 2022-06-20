@@ -13,6 +13,10 @@
     "pre-commit": "lint-staged"
   },
   "author": "Jessie France (https://github.com/jessiefrance)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JessieFrance/repository-tracker.git"
+  },
   "license": "MIT",
   "bugs": "https://github.com/JessieFrance/repository-tracker/issues",
   "homepage": "https://github.com/JessieFrance/repository-tracker",
