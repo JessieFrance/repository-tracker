@@ -1,5 +1,9 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "rebaseWhen": "auto",
+  "rebaseLabel": "rebase",
+  "rangeStrategy": "bump",
+  "semanticCommits": true
 }
