@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 (2022-08-28)
+
+- Update dependencies
+- Add/configure renovate bot, #13
+
 ## 1.0.4 (2022-06-18)
 
 - Update deprecated fontsource-roboto package to @fontsource/robo, #12
