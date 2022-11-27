@@ -1,7 +1,7 @@
 {
   "name": "Repository Tracker",
   "description": "Repository Tracker allows you to track issues and pull requests in your favorite GitHub repositories.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "manifest_version": 3,
   "icons": {
     "128": "icon.png",

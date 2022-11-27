@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.6 (2022-11-26)
+
+- Fix minimatch dependency, #82
+- Update dependencies
+
 ## 1.0.5 (2022-08-28)
 
 - Update dependencies
